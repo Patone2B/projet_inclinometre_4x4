@@ -1,0 +1,450 @@
+
+:root {
+  --accent: #71cbff;
+  --bg: #0b1016;
+  --panel: #151d27;
+  --ink: #eef5fa;
+  --muted: #9caab9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, Arial, sans-serif;
+}
+
+body {
+  background: radial-gradient(
+    ellipse at 50% 0,
+    #253342 0,
+    #0b1016 75%
+  );
+}
+
+button {
+  font: inherit;
+  touch-action: manipulation;
+}
+
+.console {
+  width: min(1080px, 100%);
+  margin: auto;
+  padding: 10px max(12px, env(safe-area-inset-right))
+           16px max(12px, env(safe-area-inset-left));
+}
+
+/* HAUT DE PAGE */
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 7px 12px;
+}
+
+.top strong {
+  display: block;
+  letter-spacing: .22em;
+  font-size: clamp(15px, 2vw, 23px);
+}
+
+.top small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.status {
+  font-size: 10px;
+  color: #febf75;
+  letter-spacing: .09em;
+  text-align: right;
+}
+
+.status.live {
+  color: #76eab0;
+}
+
+/* LES DEUX CADRANS */
+
+.meters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.instrument {
+  min-width: 0;
+  padding: 10px;
+  background: linear-gradient(155deg, #1e2935, #0b1016);
+  border: 2px solid #354452;
+  border-radius: 20px;
+  box-shadow:
+    inset 0 2px 7px #0009,
+    0 10px 30px #0006;
+}
+
+.instrument-title {
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(11px, 1.6vw, 15px);
+  letter-spacing: .15em;
+  margin-bottom: 5px;
+}
+
+.instrument-title span {
+  color: #8b9aad;
+  font-weight: 500;
+  font-size: .8em;
+}
+
+.dial {
+  width: min(100%, 235px);
+  aspect-ratio: 1;
+  margin: auto;
+  border-radius: 50%;
+  border: 6px solid #53616c;
+  position: relative;
+  overflow: hidden;
+  background: #111b27;
+  box-shadow:
+    0 0 0 3px #080d12,
+    inset 0 0 20px #000;
+}
+
+/* HORIZON ARTIFICIEL */
+
+.horizon {
+  position: absolute;
+  inset: -60%;
+  transform: translateY(0) rotate(0);
+  will-change: transform;
+}
+
+.sky, .earth {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+}
+
+.sky {
+  top: 0;
+  background: linear-gradient(#477b9d, #7ca6b7);
+}
+
+.earth {
+  bottom: 0;
+  background: linear-gradient(#9d7855, #58422d);
+}
+
+.horizon-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ffd48b;
+  box-shadow: 0 0 8px #ffc66a;
+}
+
+.pitch-marks i {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + var(--y));
+  transform: translate(-50%, -50%);
+  width: 46px;
+  border-top: 2px solid #f5f8fa;
+  text-align: center;
+  color: #fff;
+  font-size: 8px;
+  font-style: normal;
+  text-shadow: 0 1px 3px #000;
+  padding-top: 1px;
+}
+
+/* REPERE CENTRAL COMME DANS UN AVION */
+
+.aircraft-symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 57%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.aircraft-symbol span {
+  width: 40%;
+  height: 4px;
+  background: #ffd68d;
+}
+
+.aircraft-symbol b {
+  width: 13px;
+  height: 13px;
+  border: 3px solid #ffd68d;
+  border-radius: 50%;
+}
+
+/* SILHOUETTES DU RAV4 */
+
+.car {
+  position: absolute;
+  z-index: 4;
+  filter: drop-shadow(0 3px 3px #0009);
+}
+
+.car-side {
+  width: 55%;
+  bottom: 10%;
+  left: 22.5%;
+}
+
+.car-front {
+  width: 46%;
+  top: 28%;
+  left: 27%;
+}
+
+/* AIGUILLE ROUGE DU ROULIS */
+
+.roll-pointer {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  height: 17px;
+  width: 10px;
+  background: #ff5f56;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  z-index: 5;
+}
+
+.dial-edge {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 15px #020507d9;
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* VALEURS NUMERIQUES */
+
+.reading {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.reading b {
+  display: block;
+  color: var(--accent);
+  font-size: clamp(22px, 4vw, 34px);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.reading span {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: .05em;
+}
+
+/* BARRE DES MODES */
+
+.controls {
+  margin-top: 12px;
+  background: linear-gradient(145deg, #19232d, #111923);
+  padding: 12px;
+  border: 1px solid #304050;
+  border-radius: 18px;
+}
+
+.mode-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: .1em;
+}
+
+.mode-head span {
+  font-size: 9px;
+  color: var(--muted);
+}
+
+.modes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.mode {
+  min-width: 0;
+  min-height: 55px;
+  background: #0e161f;
+  color: #afbac8;
+  border: 1px solid #43505d;
+  border-radius: 12px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: clamp(10px, 1.5vw, 14px);
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.mode .symbol {
+  font-size: clamp(17px, 2.5vw, 24px);
+}
+
+.mode.active {
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow:
+    inset 0 0 0 1px var(--accent),
+    0 0 13px color-mix(
+      in srgb,
+      var(--accent),
+      transparent 65%
+    );
+}
+
+/* BOUTONS D'ACTION */
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.actions button {
+  flex: 1;
+  border: 1px solid #516174;
+  background: #273748;
+  color: #fff;
+  border-radius: 10px;
+  min-height: 42px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.actions .primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #06111b;
+}
+
+#hint {
+  color: var(--muted);
+  margin: 9px 0 0;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+/* IPHONE EN PAYSAGE */
+
+@media (orientation: landscape) and (max-height: 550px) {
+  .console {
+    padding-top: 5px;
+    padding-bottom: 8px;
+  }
+
+  .top {
+    padding-bottom: 5px;
+  }
+
+  .instrument {
+    padding: 6px;
+  }
+
+  .dial {
+    width: min(100%, min(31vh, 200px));
+  }
+
+  .controls {
+    padding: 8px;
+    margin-top: 8px;
+  }
+
+  .mode {
+    min-height: 43px;
+  }
+
+  .actions button {
+    min-height: 34px;
+  }
+
+  .reading b {
+    font-size: 23px;
+  }
+
+  .reading span {
+    font-size: 8px;
+  }
+
+  #hint {
+    font-size: 10px;
+    margin-top: 5px;
+  }
+}
+
+/* IPHONE EN PORTRAIT */
+
+@media (max-width: 500px) and (orientation: portrait) {
+  .meters {
+    gap: 7px;
+  }
+
+  .instrument {
+    padding: 5px;
+    border-radius: 13px;
+  }
+
+  .dial {
+    border-width: 4px;
+  }
+
+  .instrument-title {
+    font-size: 10px;
+  }
+
+  .reading b {
+    font-size: 22px;
+  }
+
+  .reading span {
+    font-size: 7px;
+  }
+
+  .mode {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mode-head span {
+    font-size: 8px;
+  }
+
+  .actions button {
+    font-size: 10px;
+  }
+}
