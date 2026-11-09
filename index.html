@@ -1,0 +1,195 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1118">
+  <title>RAV4 — Land Meter</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+<main class="console">
+  <header class="top">
+    <div>
+      <strong>LAND METER</strong>
+      <small>RAV4 2006 · OFF-ROAD CONSOLE</small>
+    </div>
+    <div id="status" class="status" role="status">
+      ● CAPTEURS INACTIFS
+    </div>
+  </header>
+
+  <section class="meters">
+
+    <!-- TANGAGE -->
+    <article class="instrument">
+      <div class="instrument-title">
+        TANGAGE <span>PITCH</span>
+      </div>
+
+      <div class="dial">
+        <div class="horizon" id="pitchHorizon">
+          <div class="sky"></div>
+          <div class="earth"></div>
+          <div class="horizon-line"></div>
+
+          <div class="pitch-marks">
+            <i style="--y:-80px">+40</i>
+            <i style="--y:-60px">+30</i>
+            <i style="--y:-40px">+20</i>
+            <i style="--y:-20px">+10</i>
+            <i style="--y:20px">−10</i>
+            <i style="--y:40px">−20</i>
+            <i style="--y:60px">−30</i>
+            <i style="--y:80px">−40</i>
+          </div>
+        </div>
+
+        <div class="aircraft-symbol">
+          <span></span><b></b><span></span>
+        </div>
+
+        <svg class="car car-side"
+             viewBox="0 0 240 112"
+             aria-label="Silhouette stylisée de Toyota RAV4 noir">
+          <path d="M18 74 L27 57 L48 53 L68 31
+                   Q78 23 103 23 H150
+                   Q166 24 179 39 L193 57
+                   L217 62 Q225 65 225 76
+                   L223 89 H205 A23 23 0 0 0 159 89
+                   H85 A23 23 0 0 0 39 89 H18 Z"
+                fill="#101923"
+                stroke="#ebf1f8"
+                stroke-width="4"/>
+          <path d="M76 32 H148
+                   Q159 32 170 48 L178 57 H59 Z"
+                fill="#6c879d"
+                stroke="#dfeaf2"
+                stroke-width="3"/>
+          <path d="M119 31 V58 M190 58 V83 M33 67 H43"
+                stroke="#dfeaf2"
+                stroke-width="3"/>
+          <circle cx="62" cy="90" r="20"
+                  fill="#0b1018"
+                  stroke="#eaf0f6" stroke-width="5"/>
+          <circle cx="182" cy="90" r="20"
+                  fill="#0b1018"
+                  stroke="#eaf0f6" stroke-width="5"/>
+          <circle cx="62" cy="90" r="7" fill="#647382"/>
+          <circle cx="182" cy="90" r="7" fill="#647382"/>
+        </svg>
+
+        <div class="dial-edge"></div>
+      </div>
+
+      <div class="reading">
+        <b id="pitchValue">—</b>
+        <span>DEGRÉS · AVANT / ARRIÈRE</span>
+      </div>
+    </article>
+
+    <!-- ROULIS -->
+    <article class="instrument">
+      <div class="instrument-title">
+        ROULIS <span>ROLL</span>
+      </div>
+
+      <div class="dial">
+        <div class="horizon roll-horizon" id="rollHorizon">
+          <div class="sky"></div>
+          <div class="earth"></div>
+          <div class="horizon-line"></div>
+        </div>
+
+        <svg class="car car-front"
+             viewBox="0 0 200 145"
+             aria-label="Toyota RAV4 noir, vue de face">
+          <path d="M33 81 L43 42 Q48 22 76 17
+                   H124 Q151 22 157 42
+                   L167 81 V112 H151
+                   L145 125 H126 L120 113
+                   H80 L74 125 H55
+                   L49 112 H33 Z"
+                fill="#101923"
+                stroke="#eaf0f6"
+                stroke-width="4"/>
+          <path d="M55 46 Q60 30 79 29
+                   H121 Q141 30 145 46
+                   L151 67 H49 Z"
+                fill="#6a8498"
+                stroke="#eaf0f6"
+                stroke-width="3"/>
+          <rect x="46" y="80" width="33" height="15"
+                rx="4" fill="#e3e9ec"/>
+          <rect x="121" y="80" width="33" height="15"
+                rx="4" fill="#e3e9ec"/>
+          <path d="M74 100 H126 L119 113 H81 Z"
+                fill="#4e6170"
+                stroke="#eaf0f6"
+                stroke-width="3"/>
+          <circle cx="100" cy="94" r="9"
+                  fill="none"
+                  stroke="#edf3f7"
+                  stroke-width="3"/>
+        </svg>
+
+        <div class="roll-pointer" id="rollPointer"></div>
+        <div class="dial-edge"></div>
+      </div>
+
+      <div class="reading">
+        <b id="rollValue">—</b>
+        <span>DEGRÉS · GAUCHE / DROITE</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- MODES -->
+  <section class="controls">
+    <div class="mode-head">
+      <strong>DRIVE MODES</strong>
+      <span>EFFETS VISUELS UNIQUEMENT</span>
+    </div>
+
+    <div class="modes" id="modes">
+      <button class="mode" data-mode="snow">
+        <span class="symbol">❄</span>
+        <span>SNOW</span>
+      </button>
+      <button class="mode" data-mode="sport">
+        <span class="symbol">◉</span>
+        <span>SPORT</span>
+      </button>
+      <button class="mode" data-mode="eco">
+        <span class="symbol">♧</span>
+        <span>ECO</span>
+      </button>
+      <button class="mode" data-mode="race">
+        <span class="symbol">ϟ</span>
+        <span>RACE</span>
+      </button>
+    </div>
+
+    <div class="actions">
+      <button id="start" class="primary">
+        ACTIVER LES CAPTEURS
+      </button>
+      <button id="calibrate">
+        CALIBRER LE ZÉRO
+      </button>
+    </div>
+
+    <p id="hint">
+      Fixe l’iPhone en paysage, écran face à toi.
+      Active les capteurs, puis calibre à l’arrêt
+      sur terrain horizontal.
+    </p>
+  </section>
+</main>
+
+</body>
+</html>
